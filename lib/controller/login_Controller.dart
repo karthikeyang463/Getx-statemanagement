@@ -105,7 +105,7 @@ class LoginController extends GetxController {
 
   String passwordValidationChracters(String value) {
     if (value == null || value.length <= 5) {
-      return null;
+      return 'Password must contains minimum 6 chracters';
     } else {
       return 'Password contains minimum 6 chracters';
     }
@@ -119,7 +119,7 @@ class LoginController extends GetxController {
     if (regex1.hasMatch(value)) {
       return 'Password contains 1 Special Characters';
     } else {
-      return null;
+      return 'Password must contains 1 Special Characters';
     }
   }
 
@@ -130,7 +130,7 @@ class LoginController extends GetxController {
     if (regex2.hasMatch(value)) {
       return 'Password contains 1 Uppercase Characters';
     } else {
-      return null;
+      return 'Password must contains 1 Uppercase Characters';
     }
   }
 
@@ -141,7 +141,7 @@ class LoginController extends GetxController {
     if (regex2.hasMatch(value)) {
       return 'Password contains 1 Numeric Characters';
     } else {
-      return null;
+      return 'Password  must contains 1 Numeric Characters';
     }
   }
 

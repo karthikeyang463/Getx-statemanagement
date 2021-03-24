@@ -55,6 +55,14 @@ void main() {
           'Password contains 1 Uppercase Characters');
       expect(controller.passwordValidationNumericChracter('karthikG@2'),
           'Password contains 1 Numeric Characters');
+      expect(controller.passwordValidationChracters('karhi'),
+          'Password must contains minimum 6 chracters');
+      expect(controller.passwordValidationSpecial('karthik'),
+          'Password must contains 1 Special Characters');
+      expect(controller.passwordValidationUppercase('karthikg@'),
+          'Password must contains 1 Uppercase Characters');
+      expect(controller.passwordValidationNumericChracter('karthikG@'),
+          'Password  must contains 1 Numeric Characters');
     });
   });
 }
