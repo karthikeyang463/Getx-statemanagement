@@ -164,6 +164,7 @@ class LoginView extends StatelessWidget {
                                                 : Colors.red)),
                                   ],
                                 ),
+                                // Text('${_loginController.valid2.value}'),
                                 Row(
                                   children: [
                                     _loginController.valid4.value

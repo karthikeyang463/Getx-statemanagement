@@ -65,16 +65,26 @@ class LoginController extends GetxController {
 
     if (value == null || value.length <= 5) {
       passwordValidationChracters(value);
+      valid1.value = false;
+    } else {
+      valid1.value = true;
     }
+
     if (!regex1.hasMatch(value)) {
       passwordValidationSpecial(value);
+      valid2.value = false;
+    } else {
+      valid2.value = true;
     }
+    update();
     if (!regex2.hasMatch(value)) {
+      passwordValidationUppercase(value);
       valid3.value = false;
     } else {
       valid3.value = true;
     }
     if (!regex3.hasMatch(value)) {
+      passwordValidationNumericChracter(value);
       valid4.value = false;
     } else {
       valid4.value = true;
@@ -95,13 +105,9 @@ class LoginController extends GetxController {
 
   String passwordValidationChracters(String value) {
     if (value == null || value.length <= 5) {
-      valid1.value = false;
-      // return 'Password is not correct';
       return null;
     } else {
-      valid1.value = true;
       return 'Password contains minimum 6 chracters';
-      // return null;
     }
   }
 
@@ -111,10 +117,8 @@ class LoginController extends GetxController {
     var regex1 = RegExp(patternoneSpecial);
 
     if (regex1.hasMatch(value)) {
-      valid2.value = true;
       return 'Password contains 1 Special Characters';
     } else {
-      valid2.value = false;
       return null;
     }
   }
@@ -124,10 +128,8 @@ class LoginController extends GetxController {
     var regex2 = RegExp(patternOneUppercase);
 
     if (regex2.hasMatch(value)) {
-      valid3.value = true;
       return 'Password contains 1 Uppercase Characters';
     } else {
-      valid4.value = false;
       return null;
     }
   }
@@ -137,10 +139,8 @@ class LoginController extends GetxController {
     var regex2 = RegExp(patternOneDigit);
 
     if (regex2.hasMatch(value)) {
-      valid3.value = true;
       return 'Password contains 1 Numeric Characters';
     } else {
-      valid4.value = false;
       return null;
     }
   }
