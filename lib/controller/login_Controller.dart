@@ -154,12 +154,12 @@ class LoginController extends GetxController {
     if (!regex.hasMatch(value)) {
       emailValidate.value = false;
       update();
-      // checkLogin();
+      checkLogin();
       return 'Email is not Valid';
     } else {
       emailValidate.value = true;
       update();
-      // checkLogin();
+      checkLogin();
       return 'Email is valid';
     }
   }
