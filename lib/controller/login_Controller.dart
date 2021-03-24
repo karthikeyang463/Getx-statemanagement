@@ -26,6 +26,35 @@ class LoginController extends GetxController {
     super.onInit();
   }
 
+  // String passwordValidates(String value) {
+  //   var patternoneSpecial = r'^(?=.*?[!@#\$&*~]).{8,}$';
+  //   var patternOneUppercase = r'^(?=.*[A-Z])';
+  //   var patternOneDigit = r'^(?=.*?[0-9])';
+  //   var regex1 = RegExp(patternoneSpecial);
+  //   var regex2 = RegExp(patternOneUppercase);
+  //   var regex3 = RegExp(patternOneDigit);
+
+  //   if (value == null || value.length <= 5) {
+  //     valid1.value = false;
+  //     return 'Password must contains atleast 6 chracters';
+  //   } else if (!regex1.hasMatch(value)) {
+  //     valid2.value = false;
+  //     return 'Password must contains atleast 1 Special chracters';
+  //   } else if (!regex2.hasMatch(value)) {
+  //     valid3.value = false;
+  //     return 'Password must contains atleast 1 Uppercase chracters';
+  //   } else if (!regex3.hasMatch(value)) {
+  //     valid4.value = false;
+  //     return 'Password must contains atleast 1 numeric chracters';
+  //   } else {
+  //     valid1.value = true;
+  //     valid2.value = true;
+  //     valid3.value = true;
+  //     valid4.value = true;
+  //     return 'Password is correct';
+  //   }
+  // }
+
   void passwordValidation(String value) {
     var patternoneSpecial = r'^(?=.*?[!@#\$&*~]).{8,}$';
     var patternOneUppercase = r'^(?=.*[A-Z])';
@@ -34,17 +63,11 @@ class LoginController extends GetxController {
     var regex2 = RegExp(patternOneUppercase);
     var regex3 = RegExp(patternOneDigit);
 
-    if (value == null || value.length <= 6) {
-      valid1.value = false;
-      // return valid1.value;
-    } else {
-      valid1.value = true;
-      // return valid1.value;s
+    if (value == null || value.length <= 5) {
+      passwordValidationChracters(value);
     }
     if (!regex1.hasMatch(value)) {
-      valid2.value = false;
-    } else {
-      valid2.value = true;
+      passwordValidationSpecial(value);
     }
     if (!regex2.hasMatch(value)) {
       valid3.value = false;
@@ -70,7 +93,59 @@ class LoginController extends GetxController {
     checkLogin();
   }
 
-  void emailValidation(String value) {
+  String passwordValidationChracters(String value) {
+    if (value == null || value.length <= 5) {
+      valid1.value = false;
+      // return 'Password is not correct';
+      return null;
+    } else {
+      valid1.value = true;
+      return 'Password contains minimum 6 chracters';
+      // return null;
+    }
+  }
+
+  String passwordValidationSpecial(String value) {
+    var patternoneSpecial = r'^(?=.*?[!@#\$&*~]).{8,}$';
+
+    var regex1 = RegExp(patternoneSpecial);
+
+    if (regex1.hasMatch(value)) {
+      valid2.value = true;
+      return 'Password contains 1 Special Characters';
+    } else {
+      valid2.value = false;
+      return null;
+    }
+  }
+
+  String passwordValidationUppercase(String value) {
+    var patternOneUppercase = r'^(?=.*[A-Z])';
+    var regex2 = RegExp(patternOneUppercase);
+
+    if (regex2.hasMatch(value)) {
+      valid3.value = true;
+      return 'Password contains 1 Uppercase Characters';
+    } else {
+      valid4.value = false;
+      return null;
+    }
+  }
+
+  String passwordValidationNumericChracter(String value) {
+    var patternOneDigit = r'^(?=.*?[0-9])';
+    var regex2 = RegExp(patternOneDigit);
+
+    if (regex2.hasMatch(value)) {
+      valid3.value = true;
+      return 'Password contains 1 Numeric Characters';
+    } else {
+      valid4.value = false;
+      return null;
+    }
+  }
+
+  String emailValidation(String value) {
     var pattern =
         r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]"
         r'{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]'
@@ -78,11 +153,15 @@ class LoginController extends GetxController {
     var regex = RegExp(pattern);
     if (!regex.hasMatch(value)) {
       emailValidate.value = false;
+      update();
+      // checkLogin();
+      return 'Email is not Valid';
     } else {
       emailValidate.value = true;
+      update();
+      // checkLogin();
+      return 'Email is valid';
     }
-    update();
-    checkLogin();
   }
 
   @override
